@@ -17,21 +17,12 @@ struct LocationDTO: Decodable {
 }
 
 struct CurrentDTO: Decodable {
-    let temperature: Int
+    let temperature: Double
     let condition: ConditionDTO
     
     enum CodingKeys: String, CodingKey {
         case temperature = "temp_c"
         case condition
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        condition = try container.decode(ConditionDTO.self, forKey: .condition)
-        
-        let temperatureInDouble = try container.decode(Double.self, forKey: .temperature)
-        temperature = Int(temperatureInDouble)
     }
 }
 

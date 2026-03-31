@@ -58,7 +58,7 @@ final class MainViewModel {
                             if let hourDate = DateFormatter.apiDateTime.date(from: hour.time), hourDate >= now {
                                 hourly.append(HourlyForecastModel(
                                     time: DateFormatter.hour.string(from: hourDate),
-                                    temperature: "\(hour.temperature)°",
+                                    temperature: "\(Int(hour.temperature))°",
                                     iconURL: URL(string: "https:\(hour.condition.icon)")
                                 ))
                             }
@@ -71,7 +71,7 @@ final class MainViewModel {
                             if let hourDate = DateFormatter.apiDateTime.date(from: hour.time) {
                                 hourly.append(HourlyForecastModel(
                                     time: DateFormatter.hour.string(from: hourDate),
-                                    temperature: "\(hour.temperature)°",
+                                    temperature: "\(Int(hour.temperature))°",
                                     iconURL: URL(string: "https:\(hour.condition.icon)")
                                 ))
                             }
@@ -85,13 +85,13 @@ final class MainViewModel {
                         
                         return DailyForecastModel(
                             day: dayName,
-                            minTemperature: "\(day.day.minTemperature)°",
-                            maxTemperature: "\(day.day.maxTemperature)°",
+                            minTemperature: "\(Int(day.day.minTemperature))°",
+                            maxTemperature: "\(Int(day.day.maxTemperature))°",
                             iconURL: URL(string: "https:\(day.day.condition.icon)")
                         )
                     }
                     
-                    let temp = "\(current.temperature)°"
+                    let temp = "\(Int(current.temperature))°"
                     let condition = current.condition.text
                                         
                     await MainActor.run {
