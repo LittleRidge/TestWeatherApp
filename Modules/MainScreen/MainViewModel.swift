@@ -46,12 +46,10 @@ final class MainViewModel {
                     let city = await cityTask
                     let (current, forecastDays) = try await weatherTask
                     
-                    // Почасовой прогноз
                     var hourly: [HourlyForecastModel] = []
                     
                     let now = Date()
                     
-                    // предполагаем, что forecastDays[0] — сегодня, forecastDays[1] — завтра
                     if forecastDays.count >= 1 {
                         let today = forecastDays[0]
                         for hour in today.hour {
@@ -72,13 +70,12 @@ final class MainViewModel {
                                 hourly.append(HourlyForecastModel(
                                     time: DateFormatter.hour.string(from: hourDate),
                                     temperature: "\(Int(hour.temperature))°",
-                                    iconURL: URL(string: "https:\(hour.condition.icon)")
+                                    iconURL: hour.condition.icon.asIconURL
                                 ))
                             }
                         }
                     }
                     
-                    // Дневной прогноз (следующие 3 дня)
                     let daily: [DailyForecastModel] = forecastDays.map { day in
                         let date = DateFormatter.apiDate.date(from: day.date) ?? Date()
                         let dayName = DateFormatter.weekdayShort.string(from: date)
@@ -87,7 +84,7 @@ final class MainViewModel {
                             day: dayName,
                             minTemperature: "\(Int(day.day.minTemperature))°",
                             maxTemperature: "\(Int(day.day.maxTemperature))°",
-                            iconURL: URL(string: "https:\(day.day.condition.icon)")
+                            iconURL: day.day.condition.icon.asIconURL
                         )
                     }
                     

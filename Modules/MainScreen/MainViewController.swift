@@ -9,7 +9,6 @@ import UIKit
 
 final class MainScreenViewController: UIViewController {
     
-    // UI
     private let cityLabel = UILabel()
     private let temperatureLabel = UILabel()
     private let conditionLabel = UILabel()
@@ -19,7 +18,6 @@ final class MainScreenViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
     
-    // Services / ViewModel
     private let viewModel = MainViewModel()
     
     override func viewDidLoad() {

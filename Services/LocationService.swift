@@ -85,7 +85,6 @@ final class LocationService: NSObject, LocationServiceProtocol {
 extension LocationService: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        // обновляем previousStatus
         let currentStatus = manager.authorizationStatus
         if currentStatus != previousStatus {
             previousStatus = currentStatus
